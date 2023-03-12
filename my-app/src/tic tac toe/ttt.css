@@ -20,14 +20,14 @@
     font-size: 45px;
 }
 
-section {
-    display: block;
-    min-height: 100vh;
-    background-image: url("http://localhost:63342/untitled4/Ffcj66m.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+/*section {*/
+/*    display: block;*/
+/*    min-height: 100vh;*/
+/*    background-image: url("my-app/public/Ffcj66m.png");*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
+/*    background-repeat: no-repeat;*/
+/*}*/
 
 .section {
     display: flex;
@@ -50,7 +50,7 @@ button {
     color: #212529;
     border: 0.15rem solid #ced4da;
     border-radius: 4px;
-    padding: 0.5rem 1rem;
+
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;

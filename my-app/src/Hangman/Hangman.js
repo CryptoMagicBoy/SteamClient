@@ -30,9 +30,27 @@ class Hangman extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { nWrong: 0, guessed: new Set(), answer: getUserWord() };
+    let answer = localStorage.getItem("answer");
+    if (!answer) {
+      answer = getUserWord();
+      localStorage.setItem("answer", answer);
+    }
+    this.state = {nWrong: 0, guessed: new Set(), answer: answer};
     this.handleGuess = this.handleGuess.bind(this);
+    console.log(this.state.answer);
+
   }
+  componentDidMount() {
+    localStorage.removeItem("answer"); // reset the answer when the component is mounted
+  }
+
+  // componentWillUnmount() {
+  //   setTimeout(() => {
+  //   localStorage.removeItem("answer");
+  //   this.setState({ nWrong: 0, guessed: new Set(), answer: getUserWord() });
+  //   }, 400);
+  // }
+
 
   /** guessedWord: show current-state of word:
     if guessed letters are {a,p,e}, show "app_e" for "apple"
@@ -68,34 +86,40 @@ class Hangman extends Component {
     if(isWinner){    // display 'You won'
       wordNbtns = 
       <div>
-        <h2>You WON</h2>
+        <h2 style={{ color: '#fff' }}>You WON</h2>
       </div>
     }
     else if(gameOver){  // display 'You lose'
       wordNbtns = 
       <div>
-        <p className='Hangman-word'>{this.state.answer}</p>
-        <h3>You Lose!</h3>
+        <p style={{ color: '#fff' }} className='Hangman-word'>{this.state.answer}</p>
+        <h3 style={{ color: '#fff' }}>You Lose!</h3>
       </div>
   
     }
     else {
       wordNbtns = 
       <div>
-        <p className='Hangman-word'>{this.guessedWord()}</p>
+        <p style={{ color: '#fff' }} className='Hangman-word'>{this.guessedWord()}</p>
         <p className='Hangman-btns'><AlphaButtons handleGuess={this.handleGuess} guessedBtns={this.state.guessed} /></p>
       </div>
     }
     return wordNbtns
   }
+  // componentDidMount() {
+  //   window.addEventListener("beforeunload", this.handleUnload);
+  // }
+  // handleUnload = () => {
+  //   localStorage.removeItem("answer");
+  //   this.setState({ nWrong: 0, guessed: new Set(), answer: getUserWord() });
+  // }
   /** render: render game */
   render() {
     return (
       <div className='Hangman'>
-        <h2>Виселица</h2>
-        <img src={this.props.images[this.state.nWrong]} alt={`${this.state.nWrong}/${this.props.maxWrong}`}/>
+        <img src={this.props.images[this.state.nWrong]} alt={`${this.state.nWrong}/${this.props.maxWrong}`} style={{ color: '#fff' }} />
         {this.getWordNbtns()}
-        <p>Количество ошибок: {this.state.nWrong}</p>
+        <p style={{ color: '#fff' }}>Количество ошибок: {this.state.nWrong}</p>
         <button onClick={this.reset}>Давай по новой, Миша</button>
       </div>
     );

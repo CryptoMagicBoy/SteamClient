@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./ttt.css";
-import Button from 'react-bootstrap/Button';
 const Square = ({value, handleClick, index}) => {
 
 
@@ -26,20 +25,31 @@ const Board = () => {
             [0, 4, 8],
             [2, 4, 6],
         ];
-
+        let j = 0;
         for (let i = 0; i < lines.length; i++) {
             const [a, b, c] = lines[i];
             if (board[a] && board[a] === board[b] && board[a] === board[c]) {
                 // setwinner(board[a]);
                 setTimeout(() => {
+                    j = 1;
                     alert(`Победил ${board[a]}`);
                     game_restart();
 
-                }, 200);
+                }, 20);
 
             }
 
-        }
+        }setTimeout(() => {
+            if(!board.includes('') && j === 0){
+            console.log(board)
+
+                alert(`ничья`);
+                game_restart();
+            }
+            },40);
+
+
+
     }, [board])
 
     const handleclick = (index) => {
@@ -50,6 +60,7 @@ const Board = () => {
         setBoard(newboard)
         const newturn = turn === 'X' ? 'O' : 'X'
         setTurn(newturn)
+
     }
 
 
