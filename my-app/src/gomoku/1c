@@ -1,0 +1,44 @@
+
+/* text(headline) "GOMOKU" on the page */
+#go {
+    color: rgb(55, 191, 111);
+}
+
+#mo {
+    color: rgb(143, 92, 142);
+}
+
+#ku {
+    color: rgb(128, 38, 0);
+}
+
+/* game status text*/
+.status-txt {
+    color: white;
+    font-weight: bold;
+
+}
+
+/* gomoku board */
+.game {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.game-board {
+    margin: 0 auto;
+}
+
+/* gomoku board to play */
+#goBoard {
+    border: 2px solid white;
+}
+.card2 {
+    display: flex;
+    background: rgba(217, 217, 217, 0.3);
+    width: 750px;
+    height: 750px;
+    border: 2px solid #FFFFFF;
+    border-radius: 30px;
+}

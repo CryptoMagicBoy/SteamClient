@@ -1,20 +1,36 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import "./ttt.css";
-const Square = ({value, handleClick, index}) => {
 
+class Square extends Component {
+    render() {
+        const { value, handleClick, index } = this.props;
 
-    return (<button className="squar" onClick={() => handleClick(index)}>
-        {value}
-    </button>)
+        return (
+            <button className="squar" onClick={() => handleClick(index)}>
+                {value}
+            </button>
+        );
+    }
 }
 
-const Board = () => {
+class Board extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            board: Array(9).fill(""),
+            turn: "X",
+        };
+    }
 
-    const [board, setBoard] = React.useState(Array(9).fill(''))
-    const [turn, setTurn] = React.useState('X')
-    //const [winner, setwinner] = React.useState()
 
-    React.useEffect(() => {
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.board !== this.state.board) {
+            this.checkWinner();
+        }
+    }
+
+    checkWinner = () => {
         const lines = [
             [0, 1, 2],
             [3, 4, 5],
@@ -28,76 +44,65 @@ const Board = () => {
         let j = 0;
         for (let i = 0; i < lines.length; i++) {
             const [a, b, c] = lines[i];
+            const { board } = this.state;
             if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-                // setwinner(board[a]);
                 setTimeout(() => {
                     j = 1;
                     alert(`Победил ${board[a]}`);
-                    game_restart();
-
+                    this.gameRestart();
                 }, 20);
-
             }
-
-        }setTimeout(() => {
-            if(!board.includes('') && j === 0){
-            console.log(board)
-
+        }
+        setTimeout(() => {
+            const { board } = this.state;
+            if (!board.includes("") && j === 0) {
+                console.log(board);
                 alert(`ничья`);
-                game_restart();
+                this.gameRestart();
             }
-            },40);
+        }, 40);
+    };
 
+    handleClick = (index) => {
+        const { board, turn } = this.state;
+        if (index < 0 || index > 9 || board[index]) return;
+        const newBoard = [...board];
+        newBoard.splice(index, 1, turn);
+        const newTurn = turn === "X" ? "O" : "X";
+        this.setState({ board: newBoard, turn: newTurn });
+    };
 
+    gameRestart = () => {
+        this.setState({ board: Array(9).fill(""), turn: "X" });
+    };
 
-    }, [board])
+    render() {
+        const { board } = this.state;
 
-    const handleclick = (index) => {
-        console.log({index})
-        if (index < 0 || index > 9 || board[index]) return
-        const newboard = [...board]
-        newboard.splice(index,1,turn)
-        setBoard(newboard)
-        const newturn = turn === 'X' ? 'O' : 'X'
-        setTurn(newturn)
-
-    }
-
-
-    const game_restart = () => {
-        setBoard(Array(9).fill(''))
-        setTurn("X")
-        // setwinner('')
-    }
-
-
-    return(
-
-        <section className="section">
-            <div className="card1">
-                <div className='container'>
-                    {/*{winner && <h1 className="text-center">{winner}</h1>}*/}
-                    <div className='board-wrapper'>
-                        <div className='board'>
-                            {board.map((elem, index) => (
-                                <Square value={elem}  handleClick={handleclick} index={index}/> //key ={index}
-                            ) ) }
+        return (
+            <section className="section">
+                <div className="card1">
+                    <div className="container">
+                        <div className="board-wrapper">
+                            <div className="board">
+                                {board.map((elem, index) => (
+                                    <Square
+                                        key={index}
+                                        value={elem}
+                                        handleClick={this.handleClick}
+                                        index={index}
+                                    />
+                                ))}
+                            </div>
+                            {/*<div className="button-div">*/}
+                            {/*    <button onClick={game_restart}>Очистить поле</button>*/}
+                            {/*</div>*/}
                         </div>
-                        {/*<div className="button-div">*/}
-                        {/*    <button onClick={game_restart}>Очистить поле</button>*/}
-                        {/*</div>*/}
                     </div>
                 </div>
-            </div>
-        </section>
-    )
-
+            </section>
+        );
+    }
 }
-
-
-
-// const App = () => {
-//     return <Board/>
-// };
 
 export default Board;

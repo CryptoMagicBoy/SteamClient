@@ -3,7 +3,6 @@ function getUserWord() {
   if (userWord === null){
     window.location.replace("/tic_tac_toe");
     return ;
-
   }
   if ((userWord.length < 4 || userWord.length > 10)){
     alert("Слово должно быть от 4 до 10 букв")
