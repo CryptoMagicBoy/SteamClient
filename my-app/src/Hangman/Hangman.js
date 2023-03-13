@@ -9,20 +9,10 @@ import img4 from "./4.jpg";
 import img5 from "./5.jpg";
 import img6 from "./6.jpg";
 import AlphaButtons from "./AlphaButtons";
-function sleepFor(sleepDuration){
-  var now = new Date().getTime();
-  while(new Date().getTime() < now + sleepDuration){
-    /* Do nothing */
-  }
-}
 
-function sleepThenAct(){
-  sleepFor(3000);
-  console.log("Hello, JavaScript sleep!");
-}
+
 class Hangman extends Component {
 
-  /** by default, allow 6 guesses and use provided gallows images. */
   static defaultProps = {
     maxWrong: 6,
     images: [img0, img1, img2, img3, img4, img5, img6]
@@ -41,30 +31,15 @@ class Hangman extends Component {
 
   }
   componentDidMount() {
-    localStorage.removeItem("answer"); // reset the answer when the component is mounted
+    localStorage.removeItem("answer");
   }
 
-  // componentWillUnmount() {
-  //   setTimeout(() => {
-  //   localStorage.removeItem("answer");
-  //   this.setState({ nWrong: 0, guessed: new Set(), answer: getUserWord() });
-  //   }, 400);
-  // }
-
-
-  /** guessedWord: show current-state of word:
-    if guessed letters are {a,p,e}, show "app_e" for "apple"
-  */
   guessedWord() {
     return this.state.answer
       .split("")
       .map(ltr => (this.state.guessed.has(ltr) ? ltr : "_"));
   }
 
-  /** handleGuest: handle a guessed letter:
-    - add to guessed letters
-    - if not in answer, increase number-wrong guesses
-  */
   handleGuess(evt) {
     let ltr = evt.target.value;
     this.setState(st => ({
@@ -74,7 +49,6 @@ class Hangman extends Component {
   }
 
   reset=()=>{
-    // chane the state to initial state
     this.setState({ nWrong: 0, guessed: new Set(), answer: getUserWord() })
   }
   getWordNbtns(){
@@ -106,14 +80,6 @@ class Hangman extends Component {
     }
     return wordNbtns
   }
-  // componentDidMount() {
-  //   window.addEventListener("beforeunload", this.handleUnload);
-  // }
-  // handleUnload = () => {
-  //   localStorage.removeItem("answer");
-  //   this.setState({ nWrong: 0, guessed: new Set(), answer: getUserWord() });
-  // }
-  /** render: render game */
   render() {
     return (
       <div className='Hangman'>
