@@ -81,11 +81,13 @@ class Hangman extends Component {
     return wordNbtns
   }
   render() {
+
     return (
       <div className='Hangman'>
         <img src={this.props.images[this.state.nWrong]} alt={`${this.state.nWrong}/${this.props.maxWrong}`} style={{ color: '#fff' }} />
         {this.getWordNbtns()}
         <p style={{ color: '#fff' }}>Количество ошибок: {this.state.nWrong}</p>
+
         <button onClick={this.reset}>Давай по новой, Миша</button>
       </div>
     );

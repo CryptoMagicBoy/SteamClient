@@ -61,3 +61,15 @@ button:hover {
     color: #212529;
     border-color: #b8c2cc;
 }
+/*.button-div{*/
+/*    margin-top: 5px;*/
+/*}*/
+
+.buttonrest {
+    position: absolute;
+    bottom: -50px;
+}
+
+.squar.focused {
+    outline: 2px solid #f00;
+}

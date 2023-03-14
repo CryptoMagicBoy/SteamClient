@@ -136,6 +136,13 @@ class Game extends React.Component {
                     gameOver: true,
                     gameState: `${winner} Win!`
                 });
+                // setTimeout(() => {
+                //     console.log("sdfdfsdfdfdsf");
+                //     let res = window.confirm(`${winner} Win!\nСбросить доску`);
+                //     if (res){
+                //         this.restartGame()
+                //     }
+                // }, 40);
                 return;
             }
         }
@@ -161,13 +168,13 @@ class Game extends React.Component {
                     gameState: `${winner} Win!`
 
             });
-                setTimeout(() => {
-                    console.log("sdfdfsdfdfdsf");
-                    let res = window.confirm(`${winner} Win!\nСбросить доску`);
-                    if (res){
-                        this.restartGame()
-                    }
-                }, 40);
+                // setTimeout(() => {
+                //     console.log("sdfdfsdfdfdsf");
+                //     let res = window.confirm(`${winner} Win!\nСбросить доску`);
+                //     if (res){
+                //         this.restartGame()
+                //     }
+                // }, 40);
                 return;
             }
         }
@@ -191,16 +198,16 @@ class Game extends React.Component {
                     gameOver: true,
                     gameState: `${winner} Win!`
             });
-                setTimeout(() => {
-                    console.log("sdfdfsdfdfdsf");
-let res = window.confirm(`${winner} Win!\nСбросить доску`);
-if (res){
-    this.restartGame()
-}
-                }, 40);
+//                 setTimeout(() => {
+//                     console.log("sdfdfsdfdfdsf");
+// let res = window.confirm(`${winner} Win!\nСбросить доску`);
+// if (res){
+//     this.restartGame()
+// }
+//                 }, 40);
                 return;
             }
-        }
+         }
 
     }
 
@@ -273,6 +280,7 @@ if (res){
 
     render() {
         return (
+            <container>
             <section className="section">
                 <div className="card2">
                     <div className="container">
@@ -286,9 +294,13 @@ if (res){
                                 </div>
                             </div>
                         </div>
+                        <div className="buttik">
+                            <button onClick={this.restartGame}>Очистить поле</button>
+                        </div>
                     </div>
                 </div>
             </section>
+            </container>
         );
     }
 }

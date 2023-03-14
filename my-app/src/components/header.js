@@ -7,20 +7,6 @@ import Hangman from "../Hangman/Hangman";
 import Game from "../gomoku/gomoku.js";
 
 
-const Mainpage = () => {
-
-
-
-
-
-}
-
-
-
-
-
-
-
 
 export default class Header extends Component {
     constructor(props) {
@@ -44,7 +30,7 @@ export default class Header extends Component {
             <Router>
                 <Navbar expanded={this.state.expanded} fixed="top" collapseOnSelect expand="me" variant="dark" style={{ backgroundColor: 'rgba(40,40,40,0.5)', boxShadow: '0px 0px 10px white' }}>
                     <Container>
-                        <Navbar.Brand href="/">
+                        <Navbar.Brand href="/tic_tac_toe">
                             <img src={logo} height="60" width="60" className="d-inline-block align-top" alt="Logo" />
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={this.toggleNavbar} />
